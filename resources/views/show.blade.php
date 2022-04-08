@@ -3,20 +3,15 @@
     <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
     <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
     <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+    <!DOCTYPE html>
     <html>
 
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <title>a</title>
     </head>
 
     <body>
-        {{$task}}
-        <script src="" async defer></script>
+        <h1>{{ $task }}</h1>
     </body>
 
     </html>
