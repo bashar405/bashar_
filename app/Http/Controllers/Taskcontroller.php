@@ -3,31 +3,68 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use App\Models\Task;
 class TaskController extends Controller
 {
-    public function index(){
-        $tasks= DB::table('tasks')->get();
-        return view('tasks',compact('tasks'));
+    public function index()
+    {
+         $tasks= DB::table('tasks')->orderBy('name')->get();
+      //  $tasks=Task::all();
+        return view('tasks.tasks', compact('tasks'));
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $tasks= DB::table('tasks')->find($id);
-        return view('show',compact('task'));
+
+
+
+        return view('tasks.show', compact('task'));
     }
 
 
-     public function store(    Request $request  ){
+    public function store(Request $request)
+    {
 
-     DB::table('tasks')->insert([
-         'name'=> $request->name
-     ]);
-    return redirect()->back();
+    //  DB::table('tasks')->insert([
+        //      'name'=> $request->name
+        //  ]);
+        $task=new Task();
+        $task->name= $request->name;
+        $task->save();
+
+        return redirect()->back();
+    }
+
+
+
+    public function destroy($id)
+    {
+        DB::table('tasks')->where('id', $id)->delete();
+        // Task::find($id)->delete;
+        // Task::find($id);
+        // Task->delete();
+        return redirect()->back();
+    }
+
+
+    public  function edit($id){
+       // $data= Task::find($id);
+       $data= DB::table('tasks')->find($id);
+       $tasks= DB::table('tasks')->orderBy('name')->get();
+        return view('edit',compact('data','tasks'));
+    }
+    public function update(request $request,$id){
+        $data= DB::table('tasks')->find($id);
+        $tasks=DB::table('tasks')->where('id',$id)->update(['name'=>$request->name]);
+        return redirect('/');
+       // $data = task::find($request->id);
+        // $data->name = $request->name;
+        // $data->save();
+        // return redirect()->back();
+
     }
 }
-
-
-
 
 // public function store(){
 
