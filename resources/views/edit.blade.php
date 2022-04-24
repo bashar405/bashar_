@@ -9,7 +9,7 @@
             <div class="panel-body">
                 <!-- Display Validation Errors -->
                 <!-- New Task Form -->
-                <form action="{{ route('update', $data->id) }}" method="POST" class="form-horizontal">
+                <form action="{{ route('update', $data->id) }}" method="post" class="form-horizontal">
                     @csrf
                     @method('put')
                     <!-- Task Name -->

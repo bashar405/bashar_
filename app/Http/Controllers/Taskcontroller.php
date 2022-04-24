@@ -8,16 +8,16 @@ class TaskController extends Controller
 {
     public function index()
     {
-         $tasks= DB::table('tasks')->orderBy('name')->get();
-      //  $tasks=Task::all();
+        // $tasks= DB::table('tasks')->orderBy('name')->get();
+       $tasks=Task::all() ->sortBy('name');
         return view('tasks.tasks', compact('tasks'));
     }
 
     public function show($id)
     {
-        $tasks= DB::table('tasks')->find($id);
+        // $task= DB::table('tasks')->find($id);
 
-
+        Task::find($id);
 
         return view('tasks.show', compact('task'));
     }
@@ -40,28 +40,30 @@ class TaskController extends Controller
 
     public function destroy($id)
     {
-        DB::table('tasks')->where('id', $id)->delete();
-        // Task::find($id)->delete;
-        // Task::find($id);
-        // Task->delete();
+        //DB::table('tasks')->where('id', $id)->delete();
+        // Task::find($id)->delete();
+        //Task::find($id);
+        Task::destroy($id);
         return redirect()->back();
     }
 
 
     public  function edit($id){
-       // $data= Task::find($id);
-       $data= DB::table('tasks')->find($id);
-       $tasks= DB::table('tasks')->orderBy('name')->get();
+       $data= Task::find($id);
+    //    $data= DB::table('tasks')->find($id);
+    $tasks=Task::all() ->sortBy('name');
+    //    $tasks= DB::table('tasks')->orderBy('name')->get();
         return view('edit',compact('data','tasks'));
     }
     public function update(request $request,$id){
-        $data= DB::table('tasks')->find($id);
-        $tasks=DB::table('tasks')->where('id',$id)->update(['name'=>$request->name]);
+        // $data= DB::table('tasks')->find($id);
+        // $tasks=DB::table('tasks')->where('id',$id)->update(['name'=>$request->name]);
+        // return redirect('/');
+
+       $data = task::find($id);
+        $data->name = $request->name;
+        $data->save();
         return redirect('/');
-       // $data = task::find($request->id);
-        // $data->name = $request->name;
-        // $data->save();
-        // return redirect()->back();
 
     }
 }
